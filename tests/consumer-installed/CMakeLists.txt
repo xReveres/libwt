@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.24)
+project(libwt_installed_consumer LANGUAGES CXX)
+find_package(libwt CONFIG REQUIRED)
+add_executable(consumer ../Consumer.cpp)
+target_link_libraries(consumer PRIVATE libwt::wt)

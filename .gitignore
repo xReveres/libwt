@@ -1,0 +1,7 @@
+build/
+dist/
+external/
+node_modules/
+/plans/
+__pycache__/
+*.pyc

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <title>libwt datagram client</title>
+  <label>Server port <input id="port" type="number" value="4433" /></label>
+  <label>SHA-256 certificate hash (hex) <input id="hash" size="70" /></label>
+  <button id="connect">Connect and echo</button>
+  <pre id="status"></pre>
+  <script>
+    const status = document.querySelector('#status');
+    document.querySelector('#connect').onclick = async () => {
+      let transport;
+      try {
+        const hex = document.querySelector('#hash').value.replaceAll(':', '').trim();
+        if (!/^[0-9a-fA-F]{64}$/.test(hex)) throw new Error('Enter a 32-byte SHA-256 hash');
+        const hash = Uint8Array.from(hex.match(/../g), (byte) => parseInt(byte, 16));
+        const port = Number(document.querySelector('#port').value);
+        transport = new WebTransport(`https://127.0.0.1:${port}/echo`, {
+          serverCertificateHashes: [{ algorithm: 'sha-256', value: hash }],
+        });
+        transport.closed.catch(() => {});
+        await transport.ready;
+        const writer = transport.datagrams.writable.getWriter();
+        const reader = transport.datagrams.readable.getReader();
+        await writer.write(new TextEncoder().encode('hello libwt'));
+        const { value } = await reader.read();
+        status.textContent = `Echo: ${new TextDecoder().decode(value)}`;
+        writer.releaseLock();
+        reader.releaseLock();
+      } catch (error) {
+        status.textContent = `Error: ${error.message}`;
+      } finally {
+        transport?.close();
+      }
+    };
+  </script>
+</html>
