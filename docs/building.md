@@ -109,8 +109,9 @@ cmake --build build/consumer-installed
 build/consumer-installed/consumer
 ```
 
-Installation exports the shared library, public headers, CMake package files, and
-third-party attribution. When libwt builds MsQuic itself, its shared library and
+Installation exports the shared library, public headers, CMake package files,
+the project license (normally `share/libwt/LICENSE`), and third-party attribution.
+When libwt builds MsQuic itself, its shared library and
 notices are also installed. `wt` uses an `$ORIGIN` install RPATH to locate adjacent
 libraries. GNUInstallDirs determines the library directory, commonly `lib` or `lib64`.
 The Node addon and examples do not have libwt install rules.

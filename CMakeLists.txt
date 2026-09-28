@@ -143,6 +143,7 @@ install(
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libwtConfig.cmake"
               "${CMAKE_CURRENT_BINARY_DIR}/libwtConfigVersion.cmake"
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/libwt)
+install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DATADIR}/libwt)
 install(
     FILES third_party/README.md
     DESTINATION ${CMAKE_INSTALL_DATADIR}/libwt

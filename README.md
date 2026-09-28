@@ -129,5 +129,11 @@ The repository uses clang-format 20, Ruff, Prettier, and cmake-format. Install t
 npm run format:check
 ```
 
-Vendored dependency attribution and existing license notices are documented in
+## License
+
+libwt is licensed under the [BSD 3-Clause License](LICENSE).
+Redistributions must retain the copyright notice, license conditions, and disclaimer.
+For binary distributions, include them in the documentation or other accompanying materials.
+
+Third-party dependencies retain their own licenses. Attribution and license notices are documented in
 [third_party/README.md](third_party/README.md).
